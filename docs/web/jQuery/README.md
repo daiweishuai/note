@@ -1,5 +1,6 @@
-# jQuery
-## html与text方法
+git remote add origin git@github.com:daiweishuai/note.git# jQuery
+
+## html 与 text 方法
 
 ```js
 //html()相当于js中的innerHTML
@@ -19,40 +20,39 @@ $("div").text();
 
 html()会识别标签,text()不会识别标签,会把内容直接当成字符串.
 
-## css样式设置和获取
+## css 样式设置和获取
 
 ```javascript
 //获取宽(获得的是带px的值)
 $("div").css("width");
 //设置(值可以是字符串加px,也可以直接是数值不加引号)
-$("div").css("width","400px")
-$("div").css("width",400);
+$("div").css("width", "400px");
+$("div").css("width", 400);
 ```
 
-## width与height方法
+## width 与 height 方法
 
 ```javascript
 //获取width(得到的值都是数值,不含px)
-console.log($("div").width());//width
-console.log($("div").innerWidth());//width+padding
-console.log($("div").outerWidth());//width+padding+border
-console.log($("div").outerWidth(true));//width+padding+border+margin
-            
+console.log($("div").width()); //width
+console.log($("div").innerWidth()); //width+padding
+console.log($("div").outerWidth()); //width+padding+border
+console.log($("div").outerWidth(true)); //width+padding+border+margin
+
 //设置width
 $("div").width(400);
 $("div").width("400");
-$("div").width("400px")
+$("div").width("400px");
 
 //需要获取页面可视区域的宽度和高度
 //当调整浏览器窗口的大小时，发生 resize 事件。
-$(window).resize(function(){
-    console.log($(window).width());
-    console.log($(window).height());
-
+$(window).resize(function () {
+  console.log($(window).width());
+  console.log($(window).height());
 });
 ```
 
-## scrollTop与scrollLeft方法
+## scrollTop 与 scrollLeft 方法
 
 设置或者获取垂直滚动条的位置
 
@@ -64,29 +64,29 @@ $(window).scrollLeft();
 
 //当用户滚动指定的元素时，会发生 scroll 事件。
 //scroll 事件适用于所有可滚动的元素和 window 对象（浏览器窗口）。
-$(window).scroll(function(){
-//获取
-console.log($(window).scrollTop());
-console.log($(window).scrollLeft());
+$(window).scroll(function () {
+  //获取
+  console.log($(window).scrollTop());
+  console.log($(window).scrollLeft());
 });
 ```
 
 案例 小火箭返回顶部案例
 
 ```javascript
-$(".actGotop").click(function(){
-//动画到顶部
-$("html,body").stop().animate({scrollTop:0},3000);//chrome支持html 不支持body. IE6 7 8 支持body.
-//没有过度,直接到顶部
-//$(window).scrollTop(0);
+$(".actGotop").click(function () {
+  //动画到顶部
+  $("html,body").stop().animate({ scrollTop: 0 }, 3000); //chrome支持html 不支持body. IE6 7 8 支持body.
+  //没有过度,直接到顶部
+  //$(window).scrollTop(0);
 
-//虽然说window对象中没有scrollTop属性,但scrollTop是jq封装好的方法,封装后是可以用的.window对象应该用pageYOffset属性,但pageYOffset属性是只读的,不能设置.
+  //虽然说window对象中没有scrollTop属性,但scrollTop是jq封装好的方法,封装后是可以用的.window对象应该用pageYOffset属性,但pageYOffset属性是只读的,不能设置.
 });
 ```
 
-## offset与position方法
+## offset 与 position 方法
 
-offset方法获取元素距离document的位置，position方法获取的是元素距离有定位的父元素的位置。position不能传参数设置,是只读属性.
+offset 方法获取元素距离 document 的位置，position 方法获取的是元素距离有定位的父元素的位置。position 不能传参数设置,是只读属性.
 
 ```javascript
 //offset是一个对象,里面存的是该元素外边界到document的距离(都是数值,没有px单位)
@@ -96,13 +96,13 @@ console.log($(".son").offset());
 console.log($(".son").position().left);
 ```
 
-## jQuery事件机制
+## jQuery 事件机制
 
-jQuery对js事件进行了封装,增加并扩展了事件处理机制.
+jQuery 对 js 事件进行了封装,增加并扩展了事件处理机制.
 
-jQuery事件发展历程
+jQuery 事件发展历程
 
-简单事件绑定>>bind事件绑定>>delegate事件绑定>>on事件绑定(推荐)
+简单事件绑定>>bind 事件绑定>>delegate 事件绑定>>on 事件绑定(推荐)
 
 ### 简单事件注册:
 
@@ -114,31 +114,29 @@ mouseleave(handler)  事件离开事件
 
 缺点:不能注册多个事件
 
-### bind方式注册事件
+### bind 方式注册事件
 
 ```javascript
 //第一个参数:事件类型
 //第二个参数:事件处理程序
 //多种事件共用一种函数
-$("p").bind("click mouseenter", function(){
-//事件响应方法
+$("p").bind("click mouseenter", function () {
+  //事件响应方法
 });
 //每种事件用各自的函数
 $("p").bind({
-click:function () {
-alert("呵呵")
-},
-mouseenter:function () {
-alert("哈哈")
-}
+  click: function () {
+    alert("呵呵");
+  },
+  mouseenter: function () {
+    alert("哈哈");
+  },
 });
 ```
 
 缺点:不支持动态事件绑定
 
-
-
-### delegate委托事件
+### delegate 委托事件
 
 给父元素注册委托事件,最终还是子元素来执行
 
@@ -147,19 +145,19 @@ alert("哈哈")
 //第二个参数:事件的类型
 //第三个参数:函数,要做什么
 $("div").delegate("p", "click", function () {
-console.log(this);
-//为div下面的所有的p标签绑定事件
-//这里面的this是指的子元素p标签,不是指的父元素div标签.
+  console.log(this);
+  //为div下面的所有的p标签绑定事件
+  //这里面的this是指的子元素p标签,不是指的父元素div标签.
 });
 ```
 
 缺点：只能注册委托事件，因此注册事件需要记得方法太多了
 
-### on注册事件
+### on 注册事件
 
-jQuery1.7之后，jQuery用on统一了所有事件的处理方法。
+jQuery1.7 之后，jQuery 用 on 统一了所有事件的处理方法。
 
-最现代的方式，兼容zepto(移动端类似jQuery的一个库)，强烈建议使用。
+最现代的方式，兼容 zepto(移动端类似 jQuery 的一个库)，强烈建议使用。
 
 ```javascript
 // 第一个参数：events，绑定事件的名称可以是由空格分隔的多个事件（标准事件或者自定义事件）
@@ -181,21 +179,21 @@ $("<p>我是新建的p元素</p>").appendTo("div");
 
 ## 事件解绑
 
-> unbind方式（不用）
+> unbind 方式（不用）
 
 ```
 $(selector).unbind(); //解绑所有的事件
 $(selector).unbind("click"); //解绑指定的事件
 ```
 
-> undelegate方式（不用）
+> undelegate 方式（不用）
 
 ```
 $( selector ).undelegate(); //解绑所有的delegate事件
 $( selector).undelegate( “click” ); //解绑所有的click事件
 ```
 
-> off方式（推荐）
+> off 方式（推荐）
 
 ```
 // 解绑匹配元素的所有事件
@@ -221,9 +219,9 @@ $("p").trigger("click");//会触发四次是因为有四个p标签
 });
 ```
 
-## jQuery事件对象
+## jQuery 事件对象
 
-jQuery事件对象其实就是js事件对象的一个封装，处理了兼容性。
+jQuery 事件对象其实就是 js 事件对象的一个封装，处理了兼容性。
 
 ```
 //screenX和screenY	对应屏幕最左上角的值
@@ -257,57 +255,53 @@ alert("嘻嘻嘻");
 });
 ```
 
-
-
 ## 链式编程
 
-> 通常情况下，只有设置操作才能把链式编程延续下去。因为获取操作的时候，会返回获取到的相应的值，无法返回 jQuery对象。
+> 通常情况下，只有设置操作才能把链式编程延续下去。因为获取操作的时候，会返回获取到的相应的值，无法返回 jQuery 对象。
 
 ```
 end(); // 筛选选择器会改变jQuery对象的DOM对象，想要恢复到上一次的状态，并且返回匹配元素之前的状态。
 
 ```
+
 例子:五角星评分案例
 
 ```javascript
 var wjx_k = "☆";
 var wjx_s = "★";
 //鼠标移入事件
-$(".comment>li").on("mouseenter",function(){
-//移入的和移入之前的都变实心
-$(this).text(wjx_s).prevAll().text(wjx_s);
-//移入的后面的变空心
-$(this).nextAll().text(wjx_k);
+$(".comment>li").on("mouseenter", function () {
+  //移入的和移入之前的都变实心
+  $(this).text(wjx_s).prevAll().text(wjx_s);
+  //移入的后面的变空心
+  $(this).nextAll().text(wjx_k);
 
-//$(this).text(wjx_s).prevAll().text(wjx_s)加入移入的是第三个五角星,现在的jq对象变成了前两个五角星的集合了,如果再nextAll()
-//的话,会分别求第一个五角星的nextAll()是后四个五角星集合的对象,第二个五角星的nextAll()是后三个五角星集合的对象,加起来是后四个五角星集合的对象.
-//并不是最后两个.
+  //$(this).text(wjx_s).prevAll().text(wjx_s)加入移入的是第三个五角星,现在的jq对象变成了前两个五角星的集合了,如果再nextAll()
+  //的话,会分别求第一个五角星的nextAll()是后四个五角星集合的对象,第二个五角星的nextAll()是后三个五角星集合的对象,加起来是后四个五角星集合的对象.
+  //并不是最后两个.
 
-//end()可以把jq对象回退到上一个.
-//$(this).text(wjx_s).prevAll().text(wjx_s).end().nextAll().text(wjx_k);
-
+  //end()可以把jq对象回退到上一个.
+  //$(this).text(wjx_s).prevAll().text(wjx_s).end().nextAll().text(wjx_k);
 });
-
 
 //鼠标移出事件
-$(".comment").on("mouseleave",function(){
-//所有的五角星变空心
-$("li").children().text(wjx_k);
-//找到current,把current属性的li和之前的li都变成实心
-$("li.current").text(wjx_s).prevAll().text(wjx_s);
-
+$(".comment").on("mouseleave", function () {
+  //所有的五角星变空心
+  $("li").children().text(wjx_k);
+  //找到current,把current属性的li和之前的li都变成实心
+  $("li.current").text(wjx_s).prevAll().text(wjx_s);
 });
 //鼠标点击事件,当前点击的li加一个class或者属性,排除其他的class或者属性
-$(".comment>li").on("click",function(){
-$(this).addClass("current").siblings().removeClass("current");
+$(".comment>li").on("click", function () {
+  $(this).addClass("current").siblings().removeClass("current");
 });
 ```
 
-## each方法
+## each 方法
 
-jQuery的隐式迭代会对所有的DOM对象设置相同的值，但是如果我们需要给每一个对象设置不同的值的时候，就需要自己进行迭代了。
+jQuery 的隐式迭代会对所有的 DOM 对象设置相同的值，但是如果我们需要给每一个对象设置不同的值的时候，就需要自己进行迭代了。
 
-作用：遍历jQuery对象集合，为每个匹配的元素执行一个函数
+作用：遍历 jQuery 对象集合，为每个匹配的元素执行一个函数
 
 ```
 // 参数一表示当前元素在所有匹配元素中的索引号
@@ -324,8 +318,10 @@ $(selector).each(function(index,element){});
 // }
 
 //each方法遍历
-$("li").each(function(index,element){
-$("li").eq(index).css("opacity",(index+1)/10);
+$("li").each(function (index, element) {
+  $("li")
+    .eq(index)
+    .css("opacity", (index + 1) / 10);
 });
 ```
 
@@ -347,10 +343,7 @@ var c = $.noConflict();//释放$的控制权,并且把$的能力给了c
 //入口函数也可以写成 jQuery(function(){});
 
 //如果引入的jq在别的库上面,那此时的$已经是别的库中的$了.就不能调用noConflict改名或者释放$了.
-console.log($);//未改名之前$是jq的
-var $$ = $.noConflict();//把jq的$改名为$$
-console.log($);//输出此时的$,现在是itcast库的$
+console.log($); //未改名之前$是jq的
+var $$ = $.noConflict(); //把jq的$改名为$$
+console.log($); //输出此时的$,现在是itcast库的$
 ```
-
-
-
