@@ -1,0 +1,1 @@
+const e=JSON.parse('{"key":"v-b72fc4a2","path":"/other/version/","title":"版本的概念","lang":"zh-CN","frontmatter":{},"headers":[],"git":{"createdTime":1751100666000,"updatedTime":1751100666000,"contributors":[{"name":"daiweishuai","email":"1507868071@qq.com","commits":1}]},"filePathRelative":"other/version/README.md"}');export{e as data};
