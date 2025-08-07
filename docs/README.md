@@ -14,7 +14,7 @@ bannerBrand:
   #   margin: '0 auto 2rem'
   #   borderRadius: '1rem'
   bgImage: "bg.svg"
-  tagline: React、Vue、node.js
+  tagline: Vue、node.js
   buttons:
     - {
         text: home,
