@@ -56,18 +56,6 @@ module.exports = [
     ],
   },
   {
-    text: "React",
-    children: [
-      "/react/basic.md",
-      "/react/example/diff.md",
-      "/react/example/useEffect卸载旧值问题.md",
-      {
-        text: "redux",
-        children: [],
-      },
-    ],
-  },
-  {
     text: "Vue",
     children: [
       {
